@@ -8,8 +8,8 @@ class Container extends React.Component{
         this.state = {
             text:"",//["",""] [{}]
             groceryItems: [
-            { id: 1, title: "Apple" },
-            { id: 2, title: "Kiwi" },
+            { id: 1, title: "Apple", amount: 0 },
+            { id: 2, title: "Kiwi", amount: 0 },
 
         ],
     shoppingListItems:[]
@@ -22,11 +22,17 @@ class Container extends React.Component{
     handleClickGroceryItem(item){
         //console.log(item)
         this.setState(prevState =>{
+            const y = prevState.shoppingListItems.indexOf(item) === -1 ? prevState.shoppingListItems.concat(item) : prevState.shoppingListItems[0].amount + 1
+            console.log(prevState)
           return {
             
-              shoppingListItems : prevState.shoppingListItems.concat(item)
+              shoppingListItems : prevState.shoppingListItems.indexOf(item) === -1 ? prevState.shoppingListItems.concat(item) : prevState.shoppingListItems[0].amount + 1//console.log("het is al in de lijst!")
+              
+
           }
+
         })
+        
     }
 
     handleClickEmptyShoppingCart(){
@@ -38,7 +44,7 @@ class Container extends React.Component{
     putName(obj){
         this.setState(prevState => {
             // console.log(prevState.groceryItems.length)
-            const x = {id:prevState.groceryItems.length + 1,title:obj.text}
+            const x = {id:prevState.groceryItems.length + 1,title:obj.text,amount:0}
           console.log(obj.text)
             return {
                 groceryItems:prevState.groceryItems.concat(x)
